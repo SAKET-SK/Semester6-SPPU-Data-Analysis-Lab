@@ -15,7 +15,7 @@ export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib"
 
 2)hadoop-env.sh
 
-//replace the line below the comment "The jave implemantation to use" with this one line given below.
+//replace the line below the comment "The java implemantation to use" with this one line given below.
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
 3)core-site.xml
