@@ -1256,8 +1256,9 @@ Connection to localhost closed.
 
 cd Downloads
 ls
-sudo tar -xvzf hadoop-2.9.0.tar.gz
-long extraction process follows up
+sudo tar -xvzf hadoop-2.9.0.tar.gz //navigate to the folder where your zip file is present and use this command to extract it there itself. 
+//In my case I have performed operations in Downloads folder 
+//long extraction process follows up after xvzf command. Please be patient!
 
 saket910@ubuntu:~/Downloads$ ls
 hadoop-2.9.0  hadoop-2.9.0.tar.gz  hadoop-file-for-configuration
