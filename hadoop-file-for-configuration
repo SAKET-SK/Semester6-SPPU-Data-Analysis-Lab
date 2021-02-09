@@ -1,7 +1,7 @@
 1).bashrc
 
 
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 export HADOOP_HOME=/usr/local/hadoop
 export PATH=$PATH:$HADOOP_HOME/bin
 export PATH=$PATH:$HADOOP_HOME/sbin
@@ -15,7 +15,7 @@ export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib"
 
 2)hadoop-env.sh
 
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
 3)core-site.xml
 
