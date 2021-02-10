@@ -1,5 +1,6 @@
 saket910@ubuntu:~$ sudo dpkg-reconfigure unattended-upgrades
 [sudo] password for saket910: 
+=======================================================================================================================================
 saket910@ubuntu:~$ sudo apt-get install default-jdk
 Reading package lists... Done
 Building dependency tree       
@@ -328,6 +329,7 @@ saket910@ubuntu:~$ java -version
 openjdk version "11.0.9.1" 2020-11-04
 OpenJDK Runtime Environment (build 11.0.9.1+1-Ubuntu-0ubuntu1.20.04)
 OpenJDK 64-Bit Server VM (build 11.0.9.1+1-Ubuntu-0ubuntu1.20.04, mixed mode, sharing)
+=======================================================================================================================================
 saket910@ubuntu:~$ sudo apt-get update
 [sudo] password for saket910: 
 Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [109 kB]
@@ -346,6 +348,7 @@ Get:13 http://us.archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 DEP-11
 Get:14 http://us.archive.ubuntu.com/ubuntu focal-backports/universe amd64 DEP-11 Metadata [1,768 B]                                                                                                       
 Fetched 3,471 kB in 11s (309 kB/s)                                                                                                                                                                        
 Reading package lists... Done
+=======================================================================================================================================
 saket910@ubuntu:~$ sudo apt-get upgrade
 Reading package lists... Done
 Building dependency tree       
@@ -1121,6 +1124,7 @@ update-initramfs: Generating /boot/initrd.img-5.8.0-41-generic
 saket910@ubuntu:~$ sudo addgroup hadoop
 Adding group `hadoop' (GID 1001) ...
 Done.
+=======================================================================================================================================
 saket910@ubuntu:~$ sudo adduser --ingroup hadoop hduser
 Adding user `hduser' ...
 Adding new user `hduser' (1001) with group `hadoop' ...
@@ -1137,10 +1141,12 @@ Enter the new value, or press ENTER for the default
 	Home Phone []: 
 	Other []: 
 Is the information correct? [Y/n] Y
+=======================================================================================================================================
 saket910@ubuntu:~$ sudo adduser hduser sudo
 Adding user `hduser' to group `sudo' ...
 Adding user hduser to group sudo
 Done.
+=======================================================================================================================================
 saket910@ubuntu:~$ sudo apt-get install openssh-server
 Reading package lists... Done
 Building dependency tree       
@@ -1179,7 +1185,6 @@ Preparing to unpack .../ssh-import-id_5.10-0ubuntu1_all.deb ...
 Unpacking ssh-import-id (5.10-0ubuntu1) ...
 Setting up openssh-sftp-server (1:8.2p1-4ubuntu0.1) ...
 Setting up openssh-server (1:8.2p1-4ubuntu0.1) ...
-
 Creating config file /etc/ssh/sshd_config with new version
 Creating SSH2 RSA key; this may take some time ...
 3072 SHA256:0+5YC0TtTgFEhweg+zg7o95TEBVbvcSHWze5E1U0/DI root@ubuntu (RSA)
@@ -1196,11 +1201,12 @@ Setting up ncurses-term (6.2-0ubuntu2) ...
 Processing triggers for systemd (245.4-4ubuntu3.4) ...
 Processing triggers for man-db (2.9.1-1) ...
 Processing triggers for ufw (0.36-6) ...
+=======================================================================================================================================
 saket910@ubuntu:~$ su hduser
 Password: 
 To run a command as administrator (user "root"), use "sudo <command>".
 See "man sudo_root" for details.
-
+=======================================================================================================================================
 hduser@ubuntu:/home/saket910$ ssh-keygen -t rsa -P ""
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/hduser/.ssh/id_rsa): 
@@ -1221,7 +1227,9 @@ The key's randomart image is:
 |       ...oooo*o+|
 |        .*= .o+.o|
 +----[SHA256]-----+
+=======================================================================================================================================
 hduser@ubuntu:/home/saket910$ cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
+=======================================================================================================================================
 hduser@ubuntu:/home/saket910$ ssh localhost
 The authenticity of host 'localhost (127.0.0.1)' can't be established.
 ECDSA key fingerprint is SHA256:TyXxioHaDIsv8FoqFPmpFlSqGGiGFHQzgziHa9ysUqY.
@@ -1249,21 +1257,26 @@ applicable law.
 
 To run a command as administrator (user "root"), use "sudo <command>".
 See "man sudo_root" for details.
-
+=======================================================================================================================================
 hduser@ubuntu:~$ exit
 logout
 Connection to localhost closed.
-
-cd Downloads
+=======================================================================================================================================
+cd Downloads (Go to the folder where your hadoop-2.9.0.tar.gz file is)
+=======================================================================================================================================
 ls
+=======================================================================================================================================
 sudo tar -xvzf hadoop-2.9.0.tar.gz //navigate to the folder where your zip file is present and use this command to extract it there itself. 
 //In my case I have performed operations in Downloads folder 
 //long extraction process follows up after xvzf command. Please be patient!
-
+=======================================================================================================================================
 saket910@ubuntu:~/Downloads$ ls
 hadoop-2.9.0  hadoop-2.9.0.tar.gz  hadoop-file-for-configuration
+=======================================================================================================================================
 saket910@ubuntu:~/Downloads$ sudo mv hadoop-2.9.0 /usr/local/hadoop
+=======================================================================================================================================
 saket910@ubuntu:~/Downloads$ sudo chown -R hduser:hadoop
+=======================================================================================================================================
 chown: missing operand after ‘hduser:hadoop’
 Try 'chown --help' for more information.
 saket910@ubuntu:~/Downloads$ sudo chown -R hduser:hadoop /usr/local
@@ -1273,7 +1286,7 @@ saket910@ubuntu:~/Downloads$ su hduser
 Password: 
 To run a command as administrator (user "root"), use "sudo <command>".
 See "man sudo_root" for details.
-
+=======================================================================================================================================
 hduser@ubuntu:/home/saket910/Downloads$ cd ..
 hduser@ubuntu:/home/saket910$ cd /usr/local
 hduser@ubuntu:/usr/local$ ls
@@ -1281,6 +1294,7 @@ bin  etc  games  hadoop  include  lib  man  sbin  share  src
 hduser@ubuntu:/usr/local$ cd hadoop
 hduser@ubuntu:/usr/local/hadoop$ ls
 bin  etc  include  lib  libexec  LICENSE.txt  NOTICE.txt  README.txt  sbin  share
+=======================================================================================================================================
 hduser@ubuntu:/usr/local/hadoop$ sudo gedit ~/.bashrc
 [sudo] password for hduser: 
 
@@ -1288,6 +1302,7 @@ hduser@ubuntu:/usr/local/hadoop$ sudo gedit ~/.bashrc
 hduser@ubuntu:/usr/local/hadoop$ source ~/.bashrc
 hduser@ubuntu:/usr/local/hadoop$ ls
 bin  etc  include  lib  libexec  LICENSE.txt  NOTICE.txt  README.txt  sbin  share
+=======================================================================================================================================
 hduser@ubuntu:/usr/local/hadoop$ cd etc
 hduser@ubuntu:/usr/local/hadoop/etc$ ls
 hadoop
@@ -1302,25 +1317,28 @@ container-executor.cfg  hadoop-metrics2.properties  httpfs-env.sh            kms
 core-site.xml           hadoop-metrics.properties   httpfs-log4j.properties  kms-env.sh               mapred-env.cmd        slaves                      yarn-env.sh
 (gedit:120236): Tepl-WARNING **: 06:44:27.528: GVfs metadata is not supported. Fallback to TeplMetadataManager. Either GVfs is not correctly installed or GVfs metadata are not supported on this platform. In the latter case, you should configure Tepl with --disable-gvfs-metadata.
 hduser@ubuntu:/usr/local/hadoop/etc/hadoop$ sudo gedit core-site.xml
-
+=======================================================================================================================================
 (gedit:120261): Tepl-WARNING **: 06:46:43.536: GVfs metadata is not supported. Fallback to TeplMetadataManager. Either GVfs is not correctly installed or GVfs metadata are not supported on this platform. In the latter case, you should configure Tepl with --disable-gvfs-metadata.
 hduser@ubuntu:/usr/local/hadoop/etc/hadoop$ sudo gedit hdfs-site.xml
-
+=======================================================================================================================================
 (gedit:120283): Tepl-WARNING **: 06:48:16.159: GVfs metadata is not supported. Fallback to TeplMetadataManager. Either GVfs is not correctly installed or GVfs metadata are not supported on this platform. In the latter case, you should configure Tepl with --disable-gvfs-metadata.
 hduser@ubuntu:/usr/local/hadoop/etc/hadoop$ sudo gedit yarn-site.xml
-
+=======================================================================================================================================
 (gedit:120298): Tepl-WARNING **: 06:49:57.710: GVfs metadata is not supported. Fallback to TeplMetadataManager. Either GVfs is not correctly installed or GVfs metadata are not supported on this platform. In the latter case, you should configure Tepl with --disable-gvfs-metadata.
 hduser@ubuntu:/usr/local/hadoop/etc/hadoop$ ls
 capacity-scheduler.xml  hadoop-env.cmd              hadoop-policy.xml        httpfs-signature.secret  kms-log4j.properties  mapred-env.sh               ssl-client.xml.example  yarn-site.xml
 configuration.xsl       hadoop-env.sh               hdfs-site.xml            httpfs-site.xml          kms-site.xml          mapred-queues.xml.template  ssl-server.xml.example
 container-executor.cfg  hadoop-metrics2.properties  httpfs-env.sh            kms-acls.xml             log4j.properties      mapred-site.xml.template    yarn-env.cmd
 core-site.xml           hadoop-metrics.properties   httpfs-log4j.properties  kms-env.sh               mapred-env.cmd        slaves                      yarn-env.sh
+=======================================================================================================================================
 hduser@ubuntu:/usr/local/hadoop/etc/hadoop$ cp mapred-site.xml.template mapred-site.xml
+=======================================================================================================================================
 hduser@ubuntu:/usr/local/hadoop/etc/hadoop$ ls
 capacity-scheduler.xml  hadoop-env.cmd              hadoop-policy.xml        httpfs-signature.secret  kms-log4j.properties  mapred-env.sh               slaves                  yarn-env.sh
 configuration.xsl       hadoop-env.sh               hdfs-site.xml            httpfs-site.xml          kms-site.xml          mapred-queues.xml.template  ssl-client.xml.example  yarn-site.xml
 container-executor.cfg  hadoop-metrics2.properties  httpfs-env.sh            kms-acls.xml             log4j.properties      mapred-site.xml             ssl-server.xml.example
 core-site.xml           hadoop-metrics.properties   httpfs-log4j.properties  kms-env.sh               mapred-env.cmd        mapred-site.xml.template    yarn-env.cmd
+=======================================================================================================================================
 hduser@ubuntu:/usr/local/hadoop/etc/hadoop$ sudo gedit mapred-site.xml
 
 (gedit:120321): Tepl-WARNING **: 06:53:39.970: GVfs metadata is not supported. Fallback to TeplMetadataManager. Either GVfs is not correctly installed or GVfs metadata are not supported on this platform. In the latter case, you should configure Tepl with --disable-gvfs-metadata.
@@ -1332,12 +1350,14 @@ hduser@ubuntu:/usr/local$ sudo mkdir -p /usr/local/hadoop_tmp/hdfs/namenode
 hduser@ubuntu:/usr/local$ sudo mkdir -p /usr/local/hadoop_tmp/hdfs/datanode
 hduser@ubuntu:/usr/local$ ls
 bin  etc  games  hadoop  hadoop_tmp  include  lib  man  sbin  share  src
+=======================================================================================================================================
 hduser@ubuntu:/usr/local$ cd hadoop_tmp
 hduser@ubuntu:/usr/local/hadoop_tmp$ ls
 hdfs
 hduser@ubuntu:/usr/local/hadoop_tmp$ cd hdfs
 hduser@ubuntu:/usr/local/hadoop_tmp/hdfs$ ls
 datanode  namenode
+=======================================================================================================================================
 hduser@ubuntu:/usr/local/hadoop_tmp/hdfs$ cd ..
 hduser@ubuntu:/usr/local/hadoop_tmp$ cd ..
 hduser@ubuntu:/usr/local$ sudo chown -R hduser usr/local/hadoop_tmp
@@ -1345,14 +1365,10 @@ chown: cannot access 'usr/local/hadoop_tmp': No such file or directory
 hduser@ubuntu:/usr/local$ sudo chown -R hduser /usr/local/hadoop_tmp
 hduser@ubuntu:/usr/local$ sudo chmod -R 777 /usr/local/hadoop_tmp/hdfs/namenode
 hduser@ubuntu:/usr/local$ sudo chmod -R 777 /usr/local/hadoop_tmp/hdfs/datanode
-hduser@ubuntu:/usr/local$ su sk910
-su: user sk910 does not exist
-hduser@ubuntu:/usr/local$ su saket910
-Password: 
-saket910@ubuntu:/usr/local$ su hduser
-Password: 
+=======================================================================================================================================
 hduser@ubuntu:/usr/local$ jps
 120477 Jps
+=======================================================================================================================================
 hduser@ubuntu:/usr/local$ hdfs namenode -format
 21/02/06 07:04:59 INFO namenode.NameNode: STARTUP_MSG: 
 /************************************************************
@@ -1487,7 +1503,7 @@ WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.
 WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 WARNING: All illegal access operations will be denied in a future release
 localhost: starting nodemanager, logging to /usr/local/hadoop/logs/yarn-hduser-nodemanager-ubuntu.out
-
+=======================================================================================================================================
 hduser@ubuntu:/usr/local$ jps
 120752 NameNode
 121156 SecondaryNameNode
