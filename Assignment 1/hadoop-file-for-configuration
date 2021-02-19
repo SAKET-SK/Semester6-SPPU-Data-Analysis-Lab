@@ -1,0 +1,68 @@
+1).bashrc
+
+//paste at the end of bashrc file i.e after the immidiate line where code ends.
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export HADOOP_HOME=/usr/local/hadoop
+export PATH=$PATH:$HADOOP_HOME/bin
+export PATH=$PATH:$HADOOP_HOME/sbin
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib"
+
+
+2)hadoop-env.sh
+
+//replace the line below the comment "The java implemantation to use" with this one line given below.
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
+3)core-site.xml
+
+//paste this code in configuration tag.
+<property>
+  <name>fs.default.name</name>
+  <value>hdfs://localhost:9000</value>
+</property>
+
+4)hdfs-site.xml
+
+//paste this code in configuration tag.
+<property>
+  <name>dfs.replication</name>
+  <value>1</value>
+</property>
+<property>
+  <name>dfs.namenode.name.dir</name>
+  <value>file:/usr/local/hadoop_tmp/hdfs/namenode</value>
+</property>
+<property>
+ <name>dfs.datanode.data.dir</name>
+ <value>file:/usr/local/hadoop_tmp/hdfs/datanode</value>
+</property>
+
+
+5)yarn-site.xml
+
+//paste this code in configuration tag
+<property>
+  <name>yarn.nodemanager.aux-services</name>
+  <value>mapreduce_shuffle</value>
+</property>
+<property>
+  <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+  <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+</property>
+
+
+6)mapred-site.xml
+
+//first perform cp mapred-site.xml.template mapred-site.xml
+//then open sudo gedit mapred-site.xml
+//paste the code in configuartion tag
+<property>
+  <name>mapreduce.framework.name</name>
+  <value>yarn</value>
+</property>
+
