@@ -1,4 +1,5 @@
 export CLASSPATH="$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.9.0.jar:$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-common-2.9.0.jar:$HADOOP_HOME/share/hadoop/common/hadoop-common-2.9.0.jar:~/mapreduce_yogesh/SalesCountry/*:$HADOOP_HOME/lib/*"
+//replace mapreduce_yogesh with any name like (analyser_logs in my case).
 
 
 
