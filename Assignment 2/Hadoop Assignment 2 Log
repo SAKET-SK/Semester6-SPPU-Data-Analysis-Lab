@@ -175,4 +175,4 @@ java.lang.InterruptedException
 		WRONG_REDUCE=0
 	File Output Format Counters 
 		Bytes Written=0
-//Start the localhost
+//Start the localhost:50070
