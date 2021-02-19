@@ -1,0 +1,178 @@
+//Please Note:- execute stop-all.sh on a terminal. Close it and start executing these steps.
+saket910@ubuntu:~$ su hduser
+Password: 
+hduser@ubuntu:/home/saket910$ cd ..
+hduser@ubuntu:/home$ cd ..
+hduser@ubuntu:/$ jps
+137513 Jps
+hduser@ubuntu:/$ sudo mkdir log_analyser
+[sudo] password for hduser: 
+mkdir: cannot create directory ‘log_analyser’: File exists
+hduser@ubuntu:/$ sudo mkdir analyser_log
+hduser@ubuntu:/$ ls
+analyser_log  bin  boot  cdrom  dev  etc  home  lib  lib32  lib64  libx32  log_analyser  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  swapfile  sys  tmp  usr  var
+hduser@ubuntu:/$ sudo rmdir log_analyser
+rmdir: failed to remove 'log_analyser': Directory not empty
+hduser@ubuntu:/$ sudo rmdir log_analyser
+hduser@ubuntu:/$ ls
+analyser_log  bin  boot  cdrom  dev  etc  home  lib  lib32  lib64  libx32  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  swapfile  sys  tmp  usr  var
+hduser@ubuntu:/$ sudo chmod -R 777 /analyser_log/
+hduser@ubuntu:/$ sudo chown -R hduser /analyser_log/
+hduser@ubuntu:/$ cd analyser_log
+hduser@ubuntu:/analyser_log$ ls
+hduser@ubuntu:/analyser_log$ sudo cp /home/saket910/Desktop/File/* /analyser_log
+hduser@ubuntu:/analyser_log$ ls
+hadoop-mapreduce-example-file.txt  SalesCountryDriver.java  SalesCountryReducer.java  SalesJan2009.csv  SalesMapper.java
+hduser@ubuntu:/analyser_log$ sudo chmod +r "."
+hduser@ubuntu:/analyser_log$ ls
+hadoop-mapreduce-example-file.txt  SalesCountryDriver.java  SalesCountryReducer.java  SalesJan2009.csv  SalesMapper.java
+hduser@ubuntu:/analyser_log$ export CLASSPATH="$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.9.0.jar:$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-common-2.9.0.jar:$HADOOP_HOME/share/hadoop/common/hadoop-common-2.9.0.jar:~/analyser_log/SalesCountry/*:$HADOOP_HOME/lib/*"
+hduser@ubuntu:/analyser_log$ javac -d . SalesCountryDriver.java SalesCountryReducer.java SalesMapper.java
+hduser@ubuntu:/analyser_log$ ls
+hadoop-mapreduce-example-file.txt  SalesCountry  SalesCountryDriver.java  SalesCountryReducer.java  SalesJan2009.csv  SalesMapper.java
+hduser@ubuntu:/analyser_log$ cd SalesCountry/
+hduser@ubuntu:/analyser_log/SalesCountry$ ls
+SalesCountryDriver.class  SalesCountryReducer.class  SalesMapper.class
+hduser@ubuntu:/analyser_log/SalesCountry$ cd ..
+hduser@ubuntu:/analyser_log$ sudo gedit manifest.txt
+
+(gedit:137699): Tepl-WARNING **: 05:57:37.980: GVfs metadata is not supported. Fallback to TeplMetadataManager. Either GVfs is not correctly installed or GVfs metadata are not supported on this platform. In the latter case, you should configure Tepl with --disable-gvfs-metadata.
+hduser@ubuntu:/analyser_log$ jar -cfm analyser_log.jar manifest.txt SalesCountry/*.class
+hduser@ubuntu:/analyser_log$ ls
+analyser_log.jar  hadoop-mapreduce-example-file.txt  manifest.txt  SalesCountry  SalesCountryDriver.java  SalesCountryReducer.java  SalesJan2009.csv  SalesMapper.java
+hduser@ubuntu:/analyser_log$ start-dfs.sh
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/usr/local/hadoop/share/hadoop/common/lib/hadoop-auth-2.9.0.jar) to method sun.security.krb5.Config.getInstance()
+WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+21/02/18 05:59:19 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Starting namenodes on [localhost]
+localhost: starting namenode, logging to /usr/local/hadoop/logs/hadoop-hduser-namenode-ubuntu.out
+localhost: starting datanode, logging to /usr/local/hadoop/logs/hadoop-hduser-datanode-ubuntu.out
+localhost: WARNING: An illegal reflective access operation has occurred
+localhost: WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/usr/local/hadoop/share/hadoop/common/lib/hadoop-auth-2.9.0.jar) to method sun.security.krb5.Config.getInstance()
+localhost: WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil
+localhost: WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+localhost: WARNING: All illegal access operations will be denied in a future release
+Starting secondary namenodes [0.0.0.0]
+0.0.0.0: starting secondarynamenode, logging to /usr/local/hadoop/logs/hadoop-hduser-secondarynamenode-ubuntu.out
+0.0.0.0: WARNING: An illegal reflective access operation has occurred
+0.0.0.0: WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/usr/local/hadoop/share/hadoop/common/lib/hadoop-auth-2.9.0.jar) to method sun.security.krb5.Config.getInstance()
+0.0.0.0: WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil
+0.0.0.0: WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+0.0.0.0: WARNING: All illegal access operations will be denied in a future release
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/usr/local/hadoop/share/hadoop/common/lib/hadoop-auth-2.9.0.jar) to method sun.security.krb5.Config.getInstance()
+WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+21/02/18 05:59:35 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:/analyser_log$ start-yarn.sh
+starting yarn daemons
+starting resourcemanager, logging to /usr/local/hadoop/logs/yarn-hduser-resourcemanager-ubuntu.out
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/usr/local/hadoop/share/hadoop/common/lib/hadoop-auth-2.9.0.jar) to method sun.security.krb5.Config.getInstance()
+WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+localhost: starting nodemanager, logging to /usr/local/hadoop/logs/yarn-hduser-nodemanager-ubuntu.out
+hduser@ubuntu:/analyser_log$ jps
+138357 SecondaryNameNode
+138981 Jps
+137930 NameNode
+138511 ResourceManager
+138655 NodeManager
+138141 DataNode
+hduser@ubuntu:/analyser_log$ sudo mkdir ~/inputfiles
+mkdir: cannot create directory ‘/home/hduser/inputfiles’: File exists
+hduser@ubuntu:/analyser_log$ sudo mkdir ~/input3000
+hduser@ubuntu:/analyser_log$ $HADOOP_HOME/bin/hdfs dfs -put ~/input3000
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/usr/local/hadoop/share/hadoop/common/lib/hadoop-auth-2.9.0.jar) to method sun.security.krb5.Config.getInstance()
+WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+21/02/18 06:02:18 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+put: `.': No such file or directory: `hdfs://localhost:9000/user/hduser'
+hduser@ubuntu:/analyser_log$ $HADOOP_HOME/bin/hdfs dfs -put ~/input3000 /
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/usr/local/hadoop/share/hadoop/common/lib/hadoop-auth-2.9.0.jar) to method sun.security.krb5.Config.getInstance()
+WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+21/02/18 06:03:02 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:/analyser_log$ $HADOOP_HOME/bin/hadoop jar analyser_log.jar /input3000 /output3000
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/usr/local/hadoop/share/hadoop/common/lib/hadoop-auth-2.9.0.jar) to method sun.security.krb5.Config.getInstance()
+WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+21/02/18 06:05:06 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+21/02/18 06:05:07 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+21/02/18 06:05:07 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+21/02/18 06:05:07 WARN mapreduce.JobResourceUploader: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+21/02/18 06:05:08 INFO mapred.FileInputFormat: Total input files to process : 0
+21/02/18 06:05:08 WARN hdfs.DataStreamer: Caught exception
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Thread.join(Thread.java:1305)
+	at java.base/java.lang.Thread.join(Thread.java:1380)
+	at org.apache.hadoop.hdfs.DataStreamer.closeResponder(DataStreamer.java:980)
+	at org.apache.hadoop.hdfs.DataStreamer.endBlock(DataStreamer.java:630)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:807)
+21/02/18 06:05:08 INFO mapreduce.JobSubmitter: number of splits:0
+21/02/18 06:05:09 INFO Configuration.deprecation: yarn.resourcemanager.system-metrics-publisher.enabled is deprecated. Instead, use yarn.system-metrics-publisher.enabled
+21/02/18 06:05:09 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1613656798792_0001
+21/02/18 06:05:10 INFO impl.YarnClientImpl: Submitted application application_1613656798792_0001
+21/02/18 06:05:10 INFO mapreduce.Job: The url to track the job: http://ubuntu:8088/proxy/application_1613656798792_0001/
+21/02/18 06:05:10 INFO mapreduce.Job: Running job: job_1613656798792_0001
+21/02/18 06:05:20 INFO mapreduce.Job: Job job_1613656798792_0001 running in uber mode : false
+21/02/18 06:05:20 INFO mapreduce.Job:  map 0% reduce 0%
+21/02/18 06:05:27 INFO mapreduce.Job:  map 0% reduce 100%
+21/02/18 06:05:28 INFO mapreduce.Job: Job job_1613656798792_0001 completed successfully
+21/02/18 06:05:28 INFO mapreduce.Job: Counters: 38
+	File System Counters
+		FILE: Number of bytes read=0
+		FILE: Number of bytes written=201879
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=0
+		HDFS: Number of bytes written=0
+		HDFS: Number of read operations=3
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched reduce tasks=1
+		Total time spent by all maps in occupied slots (ms)=0
+		Total time spent by all reduces in occupied slots (ms)=3926
+		Total time spent by all reduce tasks (ms)=3926
+		Total vcore-milliseconds taken by all reduce tasks=3926
+		Total megabyte-milliseconds taken by all reduce tasks=4020224
+	Map-Reduce Framework
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=0
+		Reduce shuffle bytes=0
+		Reduce input records=0
+		Reduce output records=0
+		Spilled Records=0
+		Shuffled Maps =0
+		Failed Shuffles=0
+		Merged Map outputs=0
+		GC time elapsed (ms)=29
+		CPU time spent (ms)=280
+		Physical memory (bytes) snapshot=127737856
+		Virtual memory (bytes) snapshot=2055450624
+		Total committed heap usage (bytes)=44040192
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Output Format Counters 
+		Bytes Written=0
+//Start the localhost
