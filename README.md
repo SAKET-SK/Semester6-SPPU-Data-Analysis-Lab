@@ -8,7 +8,9 @@ a. Creating, Dropping, and altering Database tables
 b. Creating an external Hive table to connect to the HBase for Customer Information Table
 c. Load table with data, insert new values and field in the table, Join tables with Hive
 d. Create index on Flight information Table 5) Find the average departure delay per day in 2008.
+
 ------------------------R and Python Assignments------------------------
+
 5) Perform the following operations using R/Python on the Amazon book review and facebook metrics data sets
 a. Create data subsets
 b. Merge Data
